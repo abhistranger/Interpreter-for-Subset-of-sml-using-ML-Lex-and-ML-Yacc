@@ -1,0 +1,13 @@
+program ::= {statement}"EOF" .
+statement ::= {formula";"} .
+formula ::= "("formula1")" | formula1 .
+formula1 ::= "IF" formula2 "THEN" formula2 "ELSE" formula2 | formula2 .
+formula2 ::= formula3 "IMPLIES" formula3 | formula3 .
+formula3 ::= formula4 binop formula4 | formula4 .
+formula4 ::= "NOT" formula5 | formula5 .
+formula5 ::= id | formula .
+binop ::= "AND" | "OR" | "XOR" | "EQUALS" .
+id ::= Letter{Letter} .
+Letter ::= UpperCase | LowerCase .
+UpperCase ::= "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M" | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z" .
+LowerCase ::= "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m" | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z" .
