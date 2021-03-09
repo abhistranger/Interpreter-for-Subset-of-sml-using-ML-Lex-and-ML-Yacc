@@ -17,10 +17,10 @@
 
 %noshift EOF
 
-%left IF THEN ELSE
-%left IMPLIES
+%right IF THEN ELSE
+%right IMPLIES
 %left AND OR XOR EQUALS
-%left NOT
+%right NOT
 
 %start START
 
@@ -40,6 +40,6 @@ formula:  LPAREN formula RPAREN (ABC.BracExp(ABC.LPAREN,formula,ABC.RPAREN))
 		| formula XOR formula (ABC.BinExp(ABC.XOR,formula1,formula2))
 		| formula EQUALS formula (ABC.BinExp(ABC.EQUALS,formula1,formula2))
 		| NOT formula (ABC.NotExp(ABC.NOT,formula))
-		| ID (ABC.Id(ID))
+		| ID (ABC.ID(ID))
 		| CONST (ABC.Const(CONST))
 		
