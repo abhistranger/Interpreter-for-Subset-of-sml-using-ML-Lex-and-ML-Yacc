@@ -15,8 +15,9 @@ It will open the sml interactive terminal
 ```bash
 parseFile <file_name>
 ```
-Note : file name should be written as a string
+Note : file name should be written as a string. for example if the file is input.txt then the command will be parseFile "input.txt"
+
 If you want to run for a string then use this:
 ```bash
-parseString <string>
+parseString <string>;
 ```
