@@ -4,10 +4,14 @@ structure boolexpParser =
 	  Join(structure LrParser = LrParser
      	       structure ParserData = boolexpLrVals.ParserData
      	       structure Lex = boolexpLex)
+(*structure postlist =
+struct
+val postorder : string list ref = ref []
+end*)
      
 fun invoke lexstream =
-    	     	let fun print_error (s,pos:int,_) =
-		    	TextIO.output(TextIO.stdOut, "Syntax Error:" ^ (Int.toString pos) ^ ":‘‘concerned production rule’’\n")
+    	let fun print_error (s,pos:int,_) =
+		    	TextIO.output(TextIO.stdOut, "Syntax Error:" ^ (Int.toString (pos+1)) ^ ":\"concerned production rule\"")
 		in
 		    boolexpParser.parse(0,lexstream,print_error,())
 		end
@@ -23,14 +27,8 @@ fun parse (lexer) =
     let 
     	val dummyEOF = boolexpLrVals.Tokens.EOF(0,0)
     	val (result, lexer) = invoke lexer
-		val (nextToken, lexer) = boolexpParser.Stream.get lexer		
-		(*val _ = case result
-			of SOME r =>
-                      TextIO.output(TextIO.stdOut,"result = " ^ (makestring r) ^ "\n")
-            | NONE => ()*)	
+		val (nextToken, lexer) = boolexpParser.Stream.get lexer
     in
-    	(*nextToken :: accu*)
-    	(*TextIO.output(TextIO.stdOut,(makestring result));*)
         if boolexpParser.sameToken(nextToken, dummyEOF) then result
  		else (TextIO.output(TextIO.stdOut, "Warning: Unconsumed input \n"); result)
     end

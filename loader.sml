@@ -1,6 +1,8 @@
 CM.make("$/basis.cm");
 CM.make("$/ml-yacc-lib.cm");
 use "abc.sml";
+use "typing.sml";
+use "evaluator.sml";
 use "boolexp.yacc.sig";
 use "boolexp.yacc.sml";
 use "boolexp.lex.sml";
