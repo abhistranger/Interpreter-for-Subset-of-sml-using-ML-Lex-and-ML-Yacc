@@ -39,5 +39,5 @@ open Evaluator;
 parseFile <file_name>;
 ```
 ```bash
-getType (it,[]);
+evaluate (it,[]);
 ```
