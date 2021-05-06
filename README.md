@@ -31,7 +31,7 @@ parseFile <file_name>;
 ```bash
 getType (it,[]);
 ```
-Note: if you have stored the parseFile return in some variable the pass the variable in place of it.
+Note: if you have stored the parseFile return in some variable then pass the variable in place of it.
 
 # For evaluating:
 ```bash
@@ -43,4 +43,21 @@ parseFile <file_name>;
 ```bash
 evaluate (it,[]);
 ```
-Note: if you have stored the parseFile return in some variable the pass the variable in place of it.
+Note: if you have stored the parseFile return in some variable then pass the variable in place of it.
+# For all:
+```bash
+open Evaluator;
+```
+```bash
+open Typing;
+```
+```bash
+val a = parseFile <file_name>;
+```
+You can put any variable name in place of a.
+```bash
+getType (a,[]);
+```
+```bash
+evaluate (a,[]);
+```
