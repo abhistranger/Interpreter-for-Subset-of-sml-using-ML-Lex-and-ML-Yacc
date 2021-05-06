@@ -55,7 +55,10 @@ fun envAdd (var:id, v:value, env:environment) =
 fun envLookup (var:id, env:environment) =
     case List.find(fn (x, _) => x = var) env of
 	       SOME (x, v)   => v
-	    |   NONE => case List.find(fn (x1, _) => x1 = var) (!gbev_env) of
-	       		SOME (x1, v1)   => v1
-	    		|   NONE => raise Fail ("Environment lookup error for "^ var^" in evaluation ")							    
+	    |   NONE => (case List.find(fn (x1, _) => x1 = var) (!gbev_env) of
+	       		SOME (x1, v1)   => (case v1 of 
+	       								FnVal (a,b) => FnVal(a,b)
+	       								|_ => raise Fail ("Environment lookup error for "^ var^" in evaluation ")	
+	       							)
+	    		|   NONE => raise Fail ("Environment lookup error for "^ var^" in evaluation ")		)					    
 end

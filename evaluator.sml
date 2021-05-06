@@ -42,7 +42,7 @@ fun evalExp(e:formula, env:environment):value =
       			end
       		)
       | BracExp (_,e,_) => evalExp(e,env)		   				  
-      | BinExp (e1,b,e2)  => (print "hello"; evalBinExp(b, e1, e2, env))
+      | BinExp (e1,b,e2)  => evalBinExp(b, e1, e2, env)
       | LetExp (_,x,e1,_,e2,_)  =>
 			(   let
 					val v1 = evalExp (e1, env)
@@ -76,18 +76,18 @@ fun evalExp(e:formula, env:environment):value =
 
 
 and evalBinExp(b:binop, e1:formula, e2:formula, env:environment):value =
-	(print "int int0" ;case (b, evalExp(e1, env), evalExp(e2, env))  of
+	case (b, evalExp(e1, env), evalExp(e2, env))  of
 		(PLUS, IntVal i1, IntVal i2) => IntVal (i1+i2)
 	  |   (MINUS, IntVal i1, IntVal i2) => IntVal (i1-i2)
 	  |   (TIMES, IntVal i1, IntVal i2) => IntVal (i1*i2)
-	  |   (LESSTHAN, IntVal i1, IntVal i2) => (print "int int11" ;BoolVal (i1<i2))
-	  |   (GREATERTHAN, IntVal i1, IntVal i2) => (print "int int12" ;BoolVal (i1>i2))
-	  |	  (AND, BoolVal i1, BoolVal i2) => (print "int int13" ;BoolVal (i1 andalso i2))
-	  |   (OR, BoolVal i1, BoolVal i2) => (print "int int14" ;BoolVal (i1 orelse i2))
-	  |   (XOR, BoolVal i1, BoolVal i2) => (print "int int15" ;BoolVal ((i1 orelse i2) andalso not(i1 andalso i2)))
-	  |	  (EQUALS,IntVal i1, IntVal i2) => (print "int int" ;BoolVal (i1=i2))
+	  |   (LESSTHAN, IntVal i1, IntVal i2) => BoolVal (i1<i2)
+	  |   (GREATERTHAN, IntVal i1, IntVal i2) => BoolVal (i1>i2)
+	  |	  (AND, BoolVal i1, BoolVal i2) => BoolVal (i1 andalso i2)
+	  |   (OR, BoolVal i1, BoolVal i2) => BoolVal (i1 orelse i2)
+	  |   (XOR, BoolVal i1, BoolVal i2) => BoolVal ((i1 orelse i2) andalso not(i1 andalso i2))
+	  |	  (EQUALS,IntVal i1, IntVal i2) => BoolVal (i1=i2)
 	  |   (EQUALS,BoolVal i1, BoolVal i2) => BoolVal (i1=i2)
-	  |   _  => raise brokenTypes  )
+	  |   _  => raise brokenTypes 
   
 and intereval(s: statement,env:environment):value =
 	case s of

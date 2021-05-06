@@ -11,13 +11,15 @@ fun type_envLookup(var:id, env:type_env):typ =
     case List.find(fn (x, _) => x = var) env of
 	       SOME (x, v)   => v
 	    |   NONE => (case List.find(fn (x1, _) => x1 = var) (!gb_env) of
-	    			SOME (x1,v1) => v1
+	    			SOME (x1,v1) => (case v1 of 
+	    								FnType (t1,t2) => FnType(t1,t2)
+	    								|_ => raise Fail ("variable "^ var^" is without a type")
+	    							)
 	    			| NONE => raise Fail ("variable "^ var^" is without a type")	)
 	    
     
 fun type_envAdd (var:id, t:typ, env:type_env) =
     (gb_env:=(var,t)::(!gb_env);(var,t)::env)
-    
 
     
 fun gettype (e: formula , env:type_env): typ =
