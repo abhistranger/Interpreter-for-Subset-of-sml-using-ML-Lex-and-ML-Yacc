@@ -16,7 +16,8 @@ structure Tokens= Tokens
   
 %%
 %header (functor boolexpLexFun(structure Tokens:boolexp_TOKENS));
-alpha=[A-Za-z];
+alpha=[a-zA-Z];
+alphaNumUnd=[a-zA-Z0-9_];
 digit=[0-9];
 ws=[\ \t];
 %%
@@ -54,7 +55,7 @@ ws=[\ \t];
 "in" => (accum := (!accum)^"IN \"in\",";col := (!col)+2;Tokens.IN(!pos,!pos));
 "end" => (accum := (!accum)^"END \"end\",";col := (!col)+3;Tokens.END(!pos,!pos));
 "=" => (accum := (!accum)^"EQ \"=\",";col := (!col)+1;Tokens.EQ(!pos,!pos));
-{alpha}+ => (accum := (!accum)^"ID \""^yytext^"\",";col := (!col)+size(yytext);Tokens.ID(yytext,!pos,!pos));
+{alpha}{alphaNumUnd}* => (accum := (!accum)^"ID \""^yytext^"\",";col := (!col)+size(yytext);Tokens.ID(yytext,!pos,!pos));
 {digit}+ => (accum := (!accum)^"NUM \""^yytext^"\",";col := (!col)+size(yytext);Tokens.NUM(List.foldl (fn (a,r) => ord(a) - ord(#"0") + 10*r) 0 (explode yytext), !pos, !pos));
 \r	=> (lex());
 .	=> (col := (!col)+1;error (yytext,!pos,!col,!pos);lex());
