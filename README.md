@@ -31,6 +31,8 @@ parseFile <file_name>;
 ```bash
 getType (it,[]);
 ```
+Note: if you have stored the parseFile return in some variable the pass the variable in place of it.
+
 # For evaluating:
 ```bash
 open Evaluator;
@@ -41,3 +43,4 @@ parseFile <file_name>;
 ```bash
 evaluate (it,[]);
 ```
+Note: if you have stored the parseFile return in some variable the pass the variable in place of it.
