@@ -1,4 +1,4 @@
-# Lexer-and-Parser-for-Boolean-Algebra-using-ML-Lex-and-ML-Yacc
+# Interpreter-for-Subset-of-sml-using-ML-Lex-and-ML-Yacc
 To run the program:
 1. Put all files in one directory
 2. open terminal in the current directory
